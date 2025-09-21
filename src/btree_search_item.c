@@ -3,12 +3,12 @@
 void    *btree_search_item(t_btree *root, void *data_ref, int (*cmpf)(void *, void *)) {
     if (root == NULL)
         return NULL;
-    printf("%d\n", *(int*)root->item);
     if (btree_search_item(root->left, data_ref, cmpf) == NULL) {
         if (cmpf(root->item, data_ref) == 0)
             return root->item;
         btree_search_item(root->right, data_ref, cmpf);
     }
+    return NULL;
 }
 
 // int numcmp(void *item1, void *item2) {
