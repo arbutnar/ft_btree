@@ -1,6 +1,7 @@
 #include "ft_btree.h"
-#include "ft_list.h"
 
+/* This function is a BFS (Breadth-First Search) algo:
+    Explores all nodes at current depth before moving to next depth. */
 void    apply_by_level(t_list *begin_list, int current_level, void (*applyf)(void *item, int current_level, int is_first_elem)) {
     t_list  *next_list = NULL;
     t_list  *current = begin_list;
@@ -33,24 +34,3 @@ void    btree_apply_by_level(t_btree *root, void (*applyf)(void *item, int curre
     apply_by_level(list, ++current_level, applyf);
     ft_list_clear(list, NULL);
 }
-
-// void    print(void *item, int current_level, int is_first_elem) {
-//     printf("item=%d, current_level=%d, is_first_elem=%d\n", *(int *)item, current_level, is_first_elem);
-// }
-
-// int numcmp(void *item1, void *item2) {
-//     return *(int *)item1 - *(int *)item2;
-// }
-
-// int main() {
-//     t_btree *tree = NULL;
-//     int     items[] = {5,4,2,3,8,7,6,9};
-
-//     for (unsigned int i = 0; i < sizeof(items) / sizeof(int); i++) {
-//         void *item_ptr = &items[i];
-//         btree_insert_data(&tree, item_ptr, numcmp);
-//     }
-
-//     print_subtree(tree, " ", " ", print_buff, sizeof(print_buff));
-//     btree_apply_by_level(tree, print);
-// }
