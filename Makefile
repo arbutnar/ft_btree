@@ -11,17 +11,21 @@ OBJECTS = $(addprefix $(OBJECTS_DIR)/, $(notdir $(SOURCES:.c=.o)))
 all: $(ARCHIVE)
 
 $(ARCHIVE): $(OBJECTS)
-	ar rcs $@ $^
+	$(info archiving $(ARCHIVE))
+	@ar rcs $@ $^
 
 $(OBJECTS_DIR)/%.o: $(SOURCES_DIR)/%.c
 	@mkdir -p $(OBJECTS_DIR)
-	gcc $(FLAGS) -I. -c $< -o $@
+	$(info compiling $< into $@)
+	@gcc $(FLAGS) -I. -c $< -o $@
 
 clean:
-	rm -rf $(OBJECTS_DIR)
+	$(info deleting $(OBJECTS_DIR))
+	@rm -rf $(OBJECTS_DIR)
 
 fclean: clean
-	rm -f $(ARCHIVE)
+	$(info deleting $(ARCHIVE))
+	@rm -f $(ARCHIVE)
 
 re: fclean all
 
