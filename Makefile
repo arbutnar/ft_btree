@@ -1,26 +1,27 @@
-ARC		=	ft_btree.a
-HDR		=	ft_btree.h
-SRC_DIR =	src
-OBJ_DIR =	obj
-SRC		=	$(wildcard $(SRC_DIR)/*.c)
-OBJ		=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
+ARCHIVE = ft_btree.a
+FLAGS =	-Wall -Wextra -Werror -g
 
-FLAGS	=	-Wall -Wextra -Werror -g
+SOURCES_DIR = src
+SOURCES = $(wildcard $(SOURCES_DIR)/*.c)
 
-all: $(ARC)
+OBJECTS_DIR = obj
+OBJECTS = $(addprefix $(OBJECTS_DIR)/, $(notdir $(SOURCES:.c=.o)))
 
-$(ARC): $(OBJ)
-	ar rcs $(ARC) $^
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
-	@mkdir -p $(OBJ_DIR)
+all: $(ARCHIVE)
+
+$(ARCHIVE): $(OBJECTS)
+	ar rcs $@ $^
+
+$(OBJECTS_DIR)/%.o: $(SOURCES_DIR)/%.c
+	@mkdir -p $(OBJECTS_DIR)
 	gcc $(FLAGS) -I. -c $< -o $@
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJECTS_DIR)
 
 fclean: clean
-	rm -f $(ARC)
+	rm -f $(ARCHIVE)
 
 re: fclean all
 
