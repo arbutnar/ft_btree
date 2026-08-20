@@ -1,7 +1,7 @@
 #include "ft_btree.h"
 
-/* This function is a BFS (Breadth-First Search) algo:
-    Explores all nodes at current depth before moving to next depth. */
+// This function is a BFS (Breadth-First Search) algo:
+// it explores all nodes at current depth before moving to next depth
 void    apply_by_level(t_list *begin_list, int current_level, void (*applyf)(void *item, int current_level, int is_first_elem)) {
     t_list  *next_list = NULL;
     t_list  *current = begin_list;

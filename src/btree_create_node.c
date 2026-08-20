@@ -7,3 +7,12 @@ t_btree *btree_create_node(void *item) {
     new_node->item = item;
     return new_node;
 }
+
+// int main() {
+//     t_btree *node;
+//     int     item, *item_ptr;
+
+//     item = 3;
+//     item_ptr = &item;
+//     node = btree_create_node(item_ptr);
+// }

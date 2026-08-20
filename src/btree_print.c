@@ -1,17 +1,29 @@
-#include <ft_btree.h>
+#include "ft_btree.h"
 
-char    print_buff[1024];
+#define BTREE_PRINT_INDENT 4
 
-void    btree_print(t_btree *root, char *prf_right, char *prf_left, char *buf, int buf_sz) {
-    if (root->right) {
-        int res = snprintf(buf, buf_sz, "%s", prf_right);
-        btree_print(root->right, "  ", "| ", buf + res, buf_sz - res);
-        *buf = '\0';
-    }
-    printf("%s+-%d\n", print_buff, *(int*)root->item);
-    if (root->left) {
-        int res = snprintf(buf, buf_sz, "%s", prf_left);
-        btree_print(root->left, "| ", "  ", buf + res, buf_sz - res);
-        *buf = '\0';
-    }
+void print_decimal(void *item) {
+    printf("%d\n", *(int *)item);
+}
+
+void print_character(void *item) {
+    printf("%c\n", *(char *)item);
+}
+
+void print_string(void *item) {
+    printf("%s\n", (char *)item);
+}
+
+static void btree_print_rec(t_btree *root, void (*applyf)(void*), int depth) {
+    if (root == NULL)
+        return;
+
+    btree_print_rec(root->right, applyf, depth + 1);
+    printf("%*s", depth * BTREE_PRINT_INDENT, "");
+    applyf(root->item);
+    btree_print_rec(root->left, applyf, depth + 1);
+}
+
+void btree_print(t_btree *root, void (*applyf)(void *)) {
+    btree_print_rec(root, applyf, 0);
 }

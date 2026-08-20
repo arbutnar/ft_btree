@@ -20,7 +20,7 @@ $(OBJECTS_DIR)/%.o: $(SOURCES_DIR)/%.c
 	@gcc $(FLAGS) -I. -c $< -o $@
 
 clean:
-	$(info deleting $(OBJECTS_DIR))
+	$(info deleting $(ARCHIVE) objects)
 	@rm -rf $(OBJECTS_DIR)
 
 fclean: clean

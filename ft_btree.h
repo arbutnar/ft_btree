@@ -13,8 +13,6 @@ typedef struct s_btree {
     void            *item;
 } t_btree;
 
-extern char    print_buff[1024];
-
 t_btree *btree_create_node(void *item);
 void    btree_apply_preorder(t_btree *root, void (*applyf)(void *));
 void    btree_apply_inorder(t_btree *root, void (*applyf)(void *));
@@ -26,6 +24,6 @@ void    btree_apply_by_level(t_btree *root, void (*applyf)(void *item, int curre
 void    btree_delete_node(t_btree **root, void *ref_item, int (*cmpf)(void *, void *));
 
 void    btree_clear(t_btree *root);
-void    btree_print(t_btree *root, char *prf_right, char *prf_left, char *buf, int buf_sz);
+void    btree_print(t_btree *root, void (*applyf)(void *));
 
 #endif
